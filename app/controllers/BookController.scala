@@ -2,6 +2,8 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 
+import models.Book
+import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 
 import scalaj.http.Http
@@ -16,6 +18,7 @@ class BookController @Inject() extends Controller {
   def getBook(isbn: String) = Action {
 
     // 978-86-88003-71-1
+    // 978-86-6105-041-1
     // ID dobij ljepse
     val response = Http("http://www.vbs.rs/scripts/cobiss?ukaz=GETID").asString.body
     val start = response.indexOf("http://www.vbs.rs/scripts/cobiss?ukaz=SFRM&amp;id=") +
@@ -29,9 +32,10 @@ class BookController @Inject() extends Controller {
       "PF4" -> "KW", "SS4" -> "", "lan" -> "", "mat" -> "51", "scpt" -> "")
 
     // Html Parse to Book JSON
-    val book = Http("http://www.vbs.rs/scripts/cobiss?id=" + id).postForm(params).asString
+    val html = Http("http://www.vbs.rs/scripts/cobiss?id=" + id).postForm(params).asString.body
+    val book = Book.parseHtml(html)
 
-    Ok(book.body)
+    Ok(Json.toJson(book))
   }
 
 }
