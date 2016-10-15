@@ -36,6 +36,7 @@ class BookController @Inject() extends Controller {
     val book = Book.parseHtml(html)
 
     Ok(Json.toJson(book))
+      .withHeaders(("Content-type", "application/json; charset=utf-8"))
   }
 
 }
