@@ -12,7 +12,8 @@ test-result
 server.pid
 *.eml
 /dist/
-.cache
+*.cache
+*.class
 
 # User-specific stuff:
 .idea/workspace.xml
@@ -25,6 +26,8 @@ server.pid
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
+.idea/sqldialects.xml
+.idea/vcs.xml
 
 # Gradle:
 .idea/gradle.xml

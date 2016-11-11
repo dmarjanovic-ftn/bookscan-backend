@@ -10,10 +10,10 @@
             </ProjectSettingsEntry>
           </value>
         </entry>
-        <entry key="root">
+        <entry key="dbgen">
           <value>
             <ProjectSettingsEntry>
-              <option name="confDir" value="$PROJECT_DIR$/app" />
+              <option name="confDir" value="C:\Users\Korisnik\Desktop\Soft computing\bookscan-backend\dbgen\app" />
               <option name="templateImports">
                 <list>
                   <option value="models._" />
@@ -30,7 +30,32 @@
                   <option value="controllers.Assets.Asset" />
                 </list>
               </option>
-              <option name="uri" value="$PROJECT_DIR$" />
+              <option name="uri" value="/C:/Users/Korisnik/Desktop/Soft%20computing/bookscan-backend/dbgen" />
+            </ProjectSettingsEntry>
+          </value>
+        </entry>
+        <entry key="root">
+          <value>
+            <ProjectSettingsEntry>
+              <option name="sourceDir" value="C:\Users\Korisnik\Desktop\Soft computing\bookscan-backend\app" />
+              <option name="confDir" value="C:\Users\Korisnik\Desktop\Soft computing\bookscan-backend\app" />
+              <option name="templateImports">
+                <list>
+                  <option value="models._" />
+                  <option value="controllers._" />
+                  <option value="play.api.i18n._" />
+                  <option value="views.xml._" />
+                  <option value="play.api.templates.PlayMagic._" />
+                  <option value="play.api.mvc._" />
+                  <option value="play.api.data._" />
+                </list>
+              </option>
+              <option name="routesImports">
+                <list>
+                  <option value="controllers.Assets.Asset" />
+                </list>
+              </option>
+              <option name="uri" value="/C:/Users/Korisnik/Desktop/Soft%20computing/bookscan-backend" />
             </ProjectSettingsEntry>
           </value>
         </entry>

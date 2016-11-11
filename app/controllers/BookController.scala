@@ -2,14 +2,16 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 
-import models.Book
+import dao.{UserDAO}
+import models.{Book, User}
+import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 
 import scalaj.http.Http
 
 @Singleton
-class BookController @Inject() extends Controller {
+class BookController @Inject() (usersDao: UserDAO, val messagesApi: MessagesApi) extends Controller with I18nSupport {
 
   def index() = Action {
     Ok(views.html.index("Welcome to books' search engine... "))
