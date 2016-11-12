@@ -8,6 +8,8 @@ GET     /book/:isbn                 controllers.BookController.getBook(isbn)
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 # GET a user by id
+GET     /user/logged                controllers.UserController.getLoggedUser()
 GET     /user/:id                   controllers.UserController.getUser(id: Long)
 POST    /user                       controllers.UserController.register()
 GET     /user/exists/:email         controllers.UserController.userExists(email: String)
+GET     /auth/:email/:password      controllers.UserController.authenticate(email: String, password: String)

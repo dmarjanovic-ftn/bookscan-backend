@@ -6,6 +6,7 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.11.7"
 
+resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
 
 libraryDependencies ++= Seq(
   cache,
@@ -18,8 +19,5 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-slick" % "2.0.0",
   "com.typesafe.play" %% "play-slick-evolutions" % "2.0.0",
   "com.typesafe.slick" %% "slick-codegen" % "3.0.0",
-  "jp.t2v" %% "play2-auth"        % "0.14.2",
-  "jp.t2v" %% "play2-auth-social" % "0.14.2", // for social login
-  "jp.t2v" %% "play2-auth-test"   % "0.14.2" % "test",
-  play.sbt.Play.autoImport.cache // only when you use default IdContainer
+  "com.jason-goodwin" %% "authentikat-jwt" % "0.4.1"
 )

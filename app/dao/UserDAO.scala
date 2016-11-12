@@ -18,8 +18,9 @@ trait UserComponent { self: HasDatabaseConfigProvider[JdbcProfile] =>
     def first_name = column[String]("first_name")
     def last_name = column[String]("last_name")
     def email = column[String]("email")
+    def password = column[String]("password")
 
-    def * = (id.?, first_name, last_name, email) <> ((User.apply _).tupled, User.unapply _)
+    def * = (id.?, first_name, last_name, email, password) <> ((User.apply _).tupled, User.unapply _)
   }
 }
 
@@ -36,8 +37,12 @@ class UserDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider)
     db.run(users.filter(_.id === id).result.headOption)
   }
 
-  def findOneByUsername(username: String): Future[Option[User]] = {
-    db.run(users.filter(_.email === username).result.headOption)
+  def findOneByEmail(email: String): Future[Option[User]] = {
+    db.run(users.filter(_.email === email).result.headOption)
+  }
+
+  def findOneByEmailAndPassword(email: String, password: String): Future[Option[User]] = {
+    db.run(users.filter(x => (x.email === email) && (x.password === password)).result.headOption)
   }
 
   /** Count all users. */
