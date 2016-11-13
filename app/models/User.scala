@@ -9,8 +9,8 @@ object User{
   implicit val implicitUserWrites = new Writes[User] {
     def writes(user: User): JsValue = {
       Json.obj(
-        "first_name" -> user.firstName,
-        "last_name" -> user.lastName,
+        "firstName" -> user.firstName,
+        "lastName" -> user.lastName,
         "email" -> user.email
       )
     }

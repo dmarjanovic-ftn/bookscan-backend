@@ -2,7 +2,7 @@ package models
 
 import play.api.libs.json.{JsValue, Json, Writes}
 
-case class Book(title: String, author: String, language: String, year: String, publisher: String)
+case class Book(id: Option[Long] = None, title: String, author: String, language: String, year: String, publisher: String)
 
 object Book {
 
@@ -12,7 +12,7 @@ object Book {
     val values = keys map (key => extract(key, html))
 
     // FIXME Figure out better way to make class with Seq's parameters
-    new Book(values(0), values(1), values(2), values(3), values(4))
+    new Book(None, values(0), values(1), values(2), values(3), values(4))
   }
 
   implicit val implicitBookWrites = new Writes[Book] {
