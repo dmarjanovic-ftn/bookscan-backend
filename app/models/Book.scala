@@ -2,9 +2,7 @@ package models
 
 import play.api.libs.json.{JsValue, Json, Writes}
 
-case class Book(title: String, author: String, language: String, year: String, publisher: String) {
-
-}
+case class Book(title: String, author: String, language: String, year: String, publisher: String)
 
 object Book {
 

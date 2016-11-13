@@ -43,7 +43,7 @@ class UserController @Inject()(usersDao: UserDAO, val messagesApi: MessagesApi, 
           user <- usersDao.findOneByEmail(email)
         } yield user
 
-        data.map { case ( u ) => Ok(Json.obj("user" -> u)) }
+        data.map { case ( u ) => Ok(Json.toJson(u)) }
     }
   }
 
