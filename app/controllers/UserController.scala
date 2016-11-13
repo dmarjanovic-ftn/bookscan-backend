@@ -8,6 +8,7 @@ import authentikat.jwt.{JsonWebToken, JwtClaimsSet, JwtHeader}
 import com.google.inject.Singleton
 import dao.UserDAO
 import models.User
+import models.dto.LoginDTO
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, Controller}
 
@@ -56,37 +57,30 @@ class UserController @Inject()(usersDao: UserDAO, val messagesApi: MessagesApi, 
     }
   }
 
+  def authenticate = Action.async(parse.json[LoginDTO]) { implicit rs =>
+    val userBody = rs.body
 
-  def authenticate(email: String, password: String) = Action.async { implicit rs =>
     val data = for {
-      user <- usersDao.findOneByEmailAndPassword(email, password)
+      user <- usersDao.findOneByEmailAndPassword(userBody.email, userBody.password)
     } yield user
 
     data.map {
-        case Some(u) => {
-          u match {
-            case us: User => {
-              val header = JwtHeader("HS256")
-              val claimsSet = JwtClaimsSet(Map("email" -> us.email))
-              val jwt: String = JsonWebToken(header, claimsSet, (new Date()).toString())
+      case Some(u) => {
+        u match {
+          case us: User => {
+            val header = JwtHeader("HS256")
+            val claimsSet = JwtClaimsSet(Map("email" -> us.email))
+            val jwt: String = JsonWebToken(header, claimsSet, (new Date()).toString())
 
-              val claims: Option[Map[String, String]] = jwt match {
-                case JsonWebToken(header, claimsSet, signature) =>
-                  claimsSet.asSimpleMap.toOption
-                case x =>
-                  None
-              }
-
-              Ok(Json.toJson(LoginResponse(jwt)))
-                .withHeaders(("Content-type", "application/json; charset=utf-8"))
-            }
-            case _ => Unauthorized("User with wrong credentials")
+            Ok(Json.toJson(LoginResponse(jwt)))
+              .withHeaders(("Content-type", "application/json; charset=utf-8"))
           }
+          case _ => Unauthorized("User with wrong credentials")
         }
-        case _ => Unauthorized("User with wrong credentials")
       }
+      case _ => Unauthorized("User with wrong credentials")
+    }
   }
-
 
   def userExists(email: String) = Action.async { implicit rs =>
       val data = for {
