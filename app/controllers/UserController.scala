@@ -22,7 +22,6 @@ import ExecutionContext.Implicits.global
 class UserController @Inject()(usersDao: UserDAO, val messagesApi: MessagesApi, val auth: Authentication) extends Controller with I18nSupport {
 
   def getUser(id: Long) = Action.async { implicit rs =>
-
     val data = for {
       user <- usersDao.findById(id)
     } yield user

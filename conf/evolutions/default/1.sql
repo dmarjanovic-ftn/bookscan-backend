@@ -9,7 +9,16 @@ create table `user` (
   `password` TEXT NOT NULL
 );
 
-# --- !Downs
-drop table `user`
+create table `books` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `title` TEXT NOT NULL,
+  `author` TEXT NOT NULL,
+  `language` TEXT NOT NULL,
+  `year` TEXT NOT NULL,
+  `publisher` TEXT NOT NULL
+);
 
+# --- !Downs
+drop table `user`;
+drop table `books`;
 
